@@ -6,7 +6,7 @@ const {FetchQueue} = require('../../services/job-processor');
 const redis = require('../../utils/redis');
 
 const getJobs = async (parentValue, {limit, offset}, context) => {
-  return FetchQueue.getJobs(offset, limit);
+  return FetchQueue.getJobs(offset, limit);;
 };
 
 const getJob = async (parentValue, {id}, context) => {
@@ -14,7 +14,7 @@ const getJob = async (parentValue, {id}, context) => {
 };
 
 const getJobStatus = async (job, args, context) => {
-  return await job.getState();
+  return job.getState();
 };
 
 const getJobProgress = async (job, args, context) => {
@@ -27,7 +27,9 @@ const getJobResults = async (job, args, context) => {
     return null;
   }
 
-  return JSON.stringify(job.returnvalue);
+  return typeof job.returnvalue === 'string' ?
+    job.returnvalue :
+    JSON.stringify(job.returnvalue);
 };
 
 const createJob = async (parentValue, {url}, context) => {
@@ -50,10 +52,10 @@ const createJob = async (parentValue, {url}, context) => {
   const job = await FetchQueue.createJob({url});
 
   redis.set(
-      redisJobCache,
-      job.id,
-      'EX',
-      expirationPeriod,
+    redisJobCache,
+    job.id,
+    'EX',
+    expirationPeriod,
   );
 
   return job;

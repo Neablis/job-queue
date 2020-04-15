@@ -15,5 +15,7 @@ module.exports = {
     'ecmaVersion': 2018,
   },
   'rules': {
+    'new-cap': 0,
+    'indent': ["error", 2]
   },
 };

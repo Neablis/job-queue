@@ -16,7 +16,9 @@ const JobType = new GraphQLObjectType({
   description: 'Job Type',
 
   fields: () => ({
-    id: {type: GraphQLInt},
+    id: {
+      type: GraphQLInt,
+    },
     progress: {
       type: GraphQLInt,
       resolve: getJobProgress,

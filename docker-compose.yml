@@ -1,40 +1,39 @@
 # docker-compose.yml
-redis:
-  image: redis
-  container_name: cache
-  expose:
-    - 6379
+version: '3.7'
 
-job:
-  build: ./
-  links:
-    - redis
-  environment:
-    - REDIS_URL=redis://cache
-  volumes:
-    - ./:/var/www/app
-  environment:
-    - NODE_ENV=development
-    - REDIS_URL=redis://cache
-    - PORT=3000
-    - JOB=true
-  command:
-    sh -c 'npm i && npm run-script watch'
+services:
+  redis:
+    image: redis
+    container_name: cache
+    expose:
+      - 6379
 
-app:
-  build: ./
-  links:
-    - redis
-    - job
-  environment:
-    - REDIS_URL=redis://cache
-  volumes:
-    - ./:/var/www/app
-  ports:
-    - 3000:3000
-  environment:
-    - REDIS_URL=redis://cache
-    - NODE_ENV=development
-    - PORT=3000
-  command:
-    sh -c 'npm i && npm run-script watch'
+  job:
+    build: ./
+    links:
+      - redis
+    volumes:
+      - ./:/var/www/app
+    environment:
+      - NODE_ENV=development
+      - REDIS_URL=redis://cache
+      - PORT=3000
+      - JOB=true
+    command:
+      sh -c 'npm i && npm run-script watch'
+
+  app:
+    build: ./
+    links:
+      - redis
+      - job
+    volumes:
+      - ./:/var/www/app
+    ports:
+      - 3000:3000
+    environment:
+      - REDIS_URL=redis://cache
+      - NODE_ENV=development
+      - PORT=3000
+    command:
+      sh -c 'npm i && npm run-script watch'
