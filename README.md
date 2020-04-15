@@ -22,15 +22,16 @@
 $ docker-compose up
 ```
 
-- Go to `http://localhost:3000/graphql`
+- Go to `http://localhost:3000/graphql` to test calls
 
 ## Features
 - Graphql
 - Node
 - Bulljs
+- Caching
 
 ## Usage
-- Creating a new job
+### Creating a new job
 ```graphql
   mutation {
     job (url : "<URL>") {
@@ -42,7 +43,14 @@ $ docker-compose up
   }
 ```
 
-- Getting a job
+```shell
+curl --request POST \
+  --url http://localhost:3000/ \
+  --header 'content-type: application/json' \
+  --data '{"query":"mutation {\n  job (url : \"http://numbersapi.com/44\") {\n    id\n    progress\n    result\n    status\n  }\n}"}'
+```
+
+### Getting a specific job
 ```graphql
   {
     job (id: <JOB ID>) {
@@ -54,10 +62,17 @@ $ docker-compose up
   }
 ```
 
-- Retrieving all jobs
+```shell
+curl --request POST \
+  --url http://localhost:3000/ \
+  --header 'content-type: application/json' \
+  --data '{"query":"{\n  job (id: 12) {\n    id\n    progress\n    result\n    status\n  }\n}"}'
+```
+
+### Retrieving all jobs
 ```graphql
   {
-    jobs {
+    jobs (offset: 0, limit: 100) {
       id
       progress
       result
@@ -66,14 +81,22 @@ $ docker-compose up
   }
 ```
 
+```shell
+curl --request POST \
+  --url http://localhost:3000/ \
+  --header 'content-type: application/json' \
+  --data '{"query":"{\n  jobs (offset: 0, limit: 100) {\n    id\n    progress\n    result\n    status\n  }\n}"}'
+```
+
+
 ## Tests
 ```shell
 $ docker-compose run --rm app npm run-script test
 ```
 
 ## Todo
-- Implement unhappy path testing around network requests to get to 100% coverage
-- Remove console.log and replace with winston logging
+- Push to get to 100% coverage
+- Remove console.logs and replace with Winston logging
 - Adde parallelization to the job runner
 - More comments  
 
