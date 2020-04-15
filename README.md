@@ -1,5 +1,4 @@
-# job-queue
-Job Queue Project
+# Job Queue and Processor
 
 ## Table of contents
 * [Dependencies](#dependencies)
@@ -22,8 +21,7 @@ Job Queue Project
 $ docker-compose up
 ```
 
-
----
+- Go to `http://localhost:3000/graphql`
 
 ## Features
 - Graphql
