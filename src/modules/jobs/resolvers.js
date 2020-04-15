@@ -6,7 +6,7 @@ const {FetchQueue} = require('../../services/job-processor');
 const redis = require('../../utils/redis');
 
 const getJobs = async (parentValue, {limit, offset}, context) => {
-  return FetchQueue.getJobs(offset, limit);;
+  return FetchQueue.getJobs(offset, limit);
 };
 
 const getJob = async (parentValue, {id}, context) => {

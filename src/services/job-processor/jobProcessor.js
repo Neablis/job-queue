@@ -46,7 +46,6 @@ class JobProcessor {
    * @return {*}
    */
   async getJobs(offset=0, limit=10, filter=states) {
-
     return this.queue.getJobs(filter, offset, offset + limit);
   }
 
