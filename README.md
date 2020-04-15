@@ -65,7 +65,6 @@ Retrieving all jobs
   }
 ```
 
-## Documentation
 ## Tests
 ```shell
 $ docker-compose run --rm app npm run-script test
