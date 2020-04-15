@@ -1,5 +1,4 @@
 /* eslint-disable */
-const sinon = require('sinon');
 const Queue = require('bull');
 const redis = require('ioredis');
 
@@ -117,6 +116,17 @@ describe('JobProcessor', () => {
       const jobs = await fakeQueue.getJobs();
 
       expect(jobs).to.not.be.empty;
+    });
+  });
+
+  describe('#processJob', () => {
+    it('throws if called without being implemented', async () => {
+      try {
+        const fakeQueue = new FakeQueue();
+        await fakeQueue.processJob();
+      } catch (e) {
+        expect(e).to.be.an('error');
+      }
     });
   });
 });

@@ -6,6 +6,7 @@
 * [Setup](#setup)
 * [Features](#features)
 * [Tests](#tests)
+* [Todo](#todo)
 
 ## Dependencies
 
@@ -69,5 +70,11 @@ $ docker-compose up
 ```shell
 $ docker-compose run --rm app npm run-script test
 ```
+
+## Todo
+- Implement unhappy path testing around network requests to get to 100% coverage
+- Remove console.log and replace with winston logging
+- Adde parallelization to the job runner
+- More comments  
 
 ---

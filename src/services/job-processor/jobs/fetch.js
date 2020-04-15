@@ -15,7 +15,6 @@ class FetchJob extends JobProcessor {
    */
   constructor() {
     const fetchQueue = new Queue(constants.FETCH_QUEUE, process.env.REDIS_URL);
-
     super(fetchQueue);
   }
 
