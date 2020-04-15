@@ -29,7 +29,7 @@ $ docker-compose up
 - Bulljs
 
 ## Usage
-Creating a new job
+- Creating a new job
 ```graphql
   mutation {
     job (url : "<URL>") {
@@ -41,7 +41,7 @@ Creating a new job
   }
 ```
 
-Getting a job
+- Getting a job
 ```graphql
   {
     job (id: <JOB ID>) {
@@ -53,7 +53,7 @@ Getting a job
   }
 ```
 
-Retrieving all jobs
+- Retrieving all jobs
 ```graphql
   {
     jobs {
