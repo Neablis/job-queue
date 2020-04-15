@@ -96,8 +96,9 @@ $ docker-compose run --rm app npm run-script test
 
 ## Todo
 - Push to get to 100% coverage
+- Remove failed, expired, old succeeded jobs
 - Remove console.logs and replace with Winston logging
 - Adde parallelization to the job runner
-- More comments  
+- More comments
 
 ---
